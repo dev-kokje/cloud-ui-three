@@ -4,7 +4,7 @@ import styles from "./TopBar.module.css"
 import UserDropdownMenu from "./UserDropdownMenu"
 
 const TopBar = (props) => {
-    return <Navbar bg="light" expand="lg" className={styles.customNavbar}>
+    return <Navbar bg="light" expand="lg" className={styles.customNavbar + " shadow-sm"}>
         <Container fluid>
             <Button variant="light" className={styles.toggleButton + " mx-2"}>
                 <List />

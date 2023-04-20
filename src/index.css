@@ -16,10 +16,19 @@ code {
   Common Classes Across the Application
 */
 
+.ht-80 {
+  height: 60px !important;
+  line-height: 60px;
+}
+
 .align-center {
   text-align: center !important;
 }
 
 .dropdown-menu {
   min-width: 300px !important;
+}
+
+.dropdown-toggle::after {
+  display: none;
 }
