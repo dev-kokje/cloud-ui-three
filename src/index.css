@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*
+  Common Classes Across the Application
+*/
+
+.align-center {
+  text-align: center !important;
+}
+
+.dropdown-menu {
+  min-width: 300px !important;
+}

@@ -1,0 +1,11 @@
+.customNavbar {
+    height: 80px !important;
+}
+
+.toggleButton {
+    padding: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 0.8;
+    border: none !important;
+}
