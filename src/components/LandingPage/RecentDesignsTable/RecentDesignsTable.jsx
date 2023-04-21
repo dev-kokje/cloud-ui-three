@@ -1,5 +1,36 @@
 import { Dropdown, Table } from "react-bootstrap"
-import { ThreeDots } from "react-bootstrap-icons"
+import {  Clipboard, Pencil, ThreeDots, Trash } from "react-bootstrap-icons"
+
+const recentDesigns = [
+    {
+        dname: "Demo design 1",
+        provider: "AWS",
+        people: "me",
+        created: "Yesterday",
+        lastUpdated: "3 hours ago" 
+    },
+    {
+        dname: "Demo design 2",
+        provider: "Azure",
+        people: "me",
+        created: "Yesterday",
+        lastUpdated: "6 hours ago" 
+    }
+]
+
+const MenuDropdown = (props) => {
+
+    return <Dropdown>
+        <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+            <ThreeDots />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1"><Pencil /> Edit</Dropdown.Item>
+            <Dropdown.Item href="#/action-2"><Clipboard /> Make Copy</Dropdown.Item>
+            <Dropdown.Item href="#/action-3"><Trash /> Trash</Dropdown.Item>
+        </Dropdown.Menu>
+    </Dropdown>
+}
 
 const RecentDesignsTable = (props) => {
 
@@ -15,26 +46,20 @@ const RecentDesignsTable = (props) => {
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row" className="ht-80">Demo Design</th>
-                <td className="ht-80">AWS</td>
-                <td className="ht-80">Me</td>
-                <td className="ht-80">Yesterday</td>
-                <td className="ht-80">Today</td>
-                <td className="ht-80">
-                    <Dropdown>
-                        <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
-                            <ThreeDots />
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </td>
-            </tr>
+            {
+                recentDesigns.map((design) => {
+                    return <tr>
+                        <th scope="row" className="ht-60">{design.dname}</th>
+                        <td className="ht-60">{design.provider}</td>
+                        <td className="ht-60">{design.people}</td>
+                        <td className="ht-60">{design.created}</td>
+                        <td className="ht-60">{design.lastUpdated}</td>
+                        <td className="ht-60">
+                            <MenuDropdown />
+                        </td>
+                    </tr>
+                })
+            }
         </tbody>
     </Table>
 }

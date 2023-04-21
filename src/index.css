@@ -16,8 +16,17 @@ code {
   Common Classes Across the Application
 */
 
-.ht-80 {
-  height: 60px !important;
+.ht-30 {
+  height: 30px;
+  line-height: 30px;
+}
+
+.ht-40 {
+  height: 40px;
+}
+
+.ht-60 {
+  height: 60px;
   line-height: 60px;
 }
 
@@ -26,7 +35,8 @@ code {
 }
 
 .dropdown-menu {
-  min-width: 300px !important;
+  /* min-width: 300px !important; */
+  width: max-content;
 }
 
 .dropdown-toggle::after {

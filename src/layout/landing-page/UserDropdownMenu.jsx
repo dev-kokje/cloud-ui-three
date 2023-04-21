@@ -3,7 +3,7 @@ import { Button, Col, Dropdown, Row } from "react-bootstrap"
 const UserDropdownMenu = (props) => {
 
     return <Dropdown.Menu className="me-4">
-        <Row className="p-2">
+        <Row className="py-2 px-3">
             <Col md={3} className="d-flex justify-content-end">
                 <Button variant="warning" className="w-95 h-80">RK</Button>
             </Col>
