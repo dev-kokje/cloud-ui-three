@@ -1,0 +1,16 @@
+// import bootstrap styles at the bottom
+@import "~bootstrap/scss/bootstrap.scss";
+
+.dropdown-menu {
+/* min-width: 300px !important; */
+width: max-content;
+}
+
+.dropdown-toggle::after {
+display: none;
+}
+
+.navbar {
+    height: 80px !important;
+    font-size: large;
+}

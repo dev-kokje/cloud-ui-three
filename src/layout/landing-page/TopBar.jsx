@@ -2,9 +2,13 @@ import { Button, Container, Dropdown, Nav, Navbar } from "react-bootstrap"
 import { List } from "react-bootstrap-icons"
 import styles from "./TopBar.module.css"
 import UserDropdownMenu from "./UserDropdownMenu"
+import { useNavigate } from "react-router-dom"
 
 const TopBar = (props) => {
-    return <Navbar bg="light" expand="lg" className={styles.customNavbar + " shadow-sm"}>
+
+    const navigate = useNavigate()
+
+    return <Navbar bg="light" expand="lg" className="shadow-sm">
         <Container fluid>
             <Button variant="light" className={styles.toggleButton + " mx-2"}>
                 <List />
@@ -23,7 +27,7 @@ const TopBar = (props) => {
                     className="d-flex"
                     navbarScroll
                 >
-                    <Button variant="primary" className="me-3">Create New Design</Button>
+                    <Button variant="primary" className="me-3" onClick={() => navigate("/canvas-edit")}>Create New Design</Button>
                     <Dropdown align="end">
                         <Dropdown.Toggle variant="warning" className="me-4 rounded-pill" id="dropdown-basic">
                             RK
