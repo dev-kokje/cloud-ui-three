@@ -1,11 +1,10 @@
-import { Container } from "react-bootstrap"
 import RecentDesignsList from "./RecentDesignsList"
 
 const LandingPageMainContainer = (props) => {
 
-    return <Container fluid>
+    return <div className="container-fluid">
         <RecentDesignsList />
-    </Container>
+    </div>
 }
 
 export default LandingPageMainContainer

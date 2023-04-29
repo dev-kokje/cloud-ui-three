@@ -1,5 +1,5 @@
-import { Dropdown, Table } from "react-bootstrap"
-import {  Clipboard, Pencil, ThreeDots, Trash } from "react-bootstrap-icons"
+import { useContext } from "react"
+import { ThemeContext } from "../../../context/ThemeContext"
 
 const recentDesigns = [
     {
@@ -18,23 +18,25 @@ const recentDesigns = [
     }
 ]
 
-const MenuDropdown = (props) => {
+const MenuDropdown = () => {
 
-    return <Dropdown>
-        <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
-            <ThreeDots />
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1"><Pencil /> Edit</Dropdown.Item>
-            <Dropdown.Item href="#/action-2"><Clipboard /> Make Copy</Dropdown.Item>
-            <Dropdown.Item href="#/action-3"><Trash /> Trash</Dropdown.Item>
-        </Dropdown.Menu>
-    </Dropdown>
+    const { darkMode } = useContext(ThemeContext)
+
+    return <div className="dropdown">
+        <button className={darkMode ? "btn btn-dark dropdown-toggle" : "btn btn-light dropdown-toggle"} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i className="bi bi-three-dots"></i>
+        </button>
+        <ul className="dropdown-menu pb-4">
+            <li><a className="dropdown-item ht-40" href="#"><i className="bi bi-pencil"></i> Edit</a></li>
+            <li><a className="dropdown-item ht-40" href="#"><i className="bi bi-clipboard-plus"></i> Make Copy</a></li>
+            <li><a className="dropdown-item ht-40" href="#"><i className="bi bi-trash"></i> Trash</a></li>
+        </ul>
+    </div>
 }
 
 const RecentDesignsTable = (props) => {
 
-    return <Table hover>
+    return <table className="table">
         <thead>
             <tr>
                 <th scope="col" className="text-secondary">Name</th>
@@ -45,23 +47,23 @@ const RecentDesignsTable = (props) => {
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody className="table-group-divider">
             {
-                recentDesigns.map((design) => {
-                    return <tr>
+                recentDesigns.map((design, index) => {
+                    return <tr key={index}>
                         <th scope="row" className="ht-60">{design.dname}</th>
-                        <td className="ht-60">{design.provider}</td>
-                        <td className="ht-60">{design.people}</td>
-                        <td className="ht-60">{design.created}</td>
-                        <td className="ht-60">{design.lastUpdated}</td>
-                        <td className="ht-60">
+                        <td className="fw-normal ht-60">{design.provider}</td>
+                        <td className="fw-normal ht-60">{design.people}</td>
+                        <td className="fw-normal ht-60">{design.created}</td>
+                        <td className="fw-normal ht-60">{design.lastUpdated}</td>
+                        <td className="fw-normal ht-60">
                             <MenuDropdown />
                         </td>
                     </tr>
                 })
             }
         </tbody>
-    </Table>
+    </table>
 }
 
 export default RecentDesignsTable

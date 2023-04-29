@@ -4,8 +4,10 @@ import LandingPageMainContainer from "../components/LandingPage/LandingPageMainC
 
 const LandingPage = (props) => {
     return <StrictMode>
-        <TopBar />
-        <LandingPageMainContainer />
+        <div>
+            <TopBar />
+            <LandingPageMainContainer />
+        </div>
     </StrictMode>
 }
 

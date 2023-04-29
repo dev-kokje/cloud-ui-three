@@ -1,14 +1,13 @@
-import { Col, Row } from "react-bootstrap"
 import RecentDesignsTable from "./RecentDesignsTable/RecentDesignsTable"
 
 const RecentDesignsList = (props) => {
 
-    return <Row className="d-flex justify-content-center mt-4">
-        <Col md={11} className="fw-bold fs-5">Recent Designs</Col>
-        <Col md={11} className="mt-4">
+    return <div className="row d-flex justify-content-center mt-4 body-container">
+        <div className="col-md-11 fw-bold fs-5">Recent Designs</div>
+        <div className="col-md-11 fw-bold mt-4">
             <RecentDesignsTable />
-        </Col>
-    </Row>
+        </div>
+    </div>
 }
 
 export default RecentDesignsList

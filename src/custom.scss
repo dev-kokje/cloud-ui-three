@@ -1,5 +1,42 @@
 // import bootstrap styles at the bottom
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 @import "~bootstrap/scss/bootstrap.scss";
+
+body {
+    font-family: "Roboto";
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+/*
+Common Classes Across the Application
+*/
+
+.ht-20 {
+height: 20px;
+line-height: 20px;
+}
+
+.ht-30 {
+height: 30px;
+line-height: 30px;
+}
+
+.ht-40 {
+height: 40px;
+line-height: 40px;
+}
+
+.ht-60 {
+height: 60px;
+line-height: 60px;
+}
+
+.align-center {
+text-align: center !important;
+}
 
 .dropdown-menu {
 /* min-width: 300px !important; */
@@ -10,7 +47,15 @@ width: max-content;
 display: none;
 }
 
-.navbar {
-    height: 80px !important;
-    font-size: large;
+.form-control {
+    border-radius: 0.3rem;
+}
+
+// My Image Checkbox
+.form-check-input:focus {
+    box-shadow: none;
+}
+
+.form-check-label {
+    max-width: 50px;
 }
