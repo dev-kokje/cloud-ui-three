@@ -2,16 +2,32 @@ import { useState } from "react"
 import aws from "../../../assets/icons/aws.png"
 import azure from "../../../assets/icons/azure.png"
 import google from "../../../assets/icons/google-cloud.png"
+import { useSelector } from "react-redux"
 
 const NewDesignModal = (props) => {
 
     const [title, setTitle] = useState("")
+    const [awsChecked, setAwsCheched] = useState(false)
+    const [azsChecked, setAzsCheched] = useState(false)
+    const [gcsChecked, setGcsCheched] = useState(false)
 
     const titleChangeHandler = (e) => {
         setTitle(e.target.value)
     } 
 
-    return <div className="modal fade" id="newDesignModal" tabindex="-1" aria-labelledby="newDesignModal" aria-hidden="true">
+    const awsCheckedChangeHandler = () => {
+        setAwsCheched(!awsChecked)
+    }
+
+    const azsCheckedChangeHandler = () => {
+        setAzsCheched(!azsChecked)
+    }
+
+    const gcsCheckedChangeHandler = () => {
+        setGcsCheched(!gcsChecked)
+    }
+
+    return <div className="modal fade" id="newDesignModal" tabIndex="-1" aria-labelledby="newDesignModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content rounded-1">
             <div className="modal-header">
@@ -21,7 +37,7 @@ const NewDesignModal = (props) => {
             <div className="modal-body py-4">
                 <form className="form row g-3 justify-content-center">
                     <div className="col-md-11">
-                        <label className="form-label" for="designTitle">Design Title</label>
+                        <label className="form-label" htmlFor="designTitle">Design Title</label>
                         <input 
                             type="text" 
                             className="form-control border-none border-bottom" 
@@ -31,12 +47,18 @@ const NewDesignModal = (props) => {
                             placeholder="Untitled design" />
                     </div>
                     <div className="col-md-11">
-                        <label for="provider" className="form-label mb-3">Cloud Provider</label>
+                        <label htmlFor="provider" className="form-label mb-3">Cloud Provider</label>
                         <div className="row">
                             <div className="col-md-12 d-flex flex-row">
                                 <div className="customCheckbox me-4">
-                                    <input className="form-check-input" type="checkbox" value="aws" id="aws" />
-                                    <label className="form-check-label ms-3" for="aws">
+                                    <input 
+                                        className="form-check-input" 
+                                        type="checkbox"
+                                        id="aws"
+                                        checked={awsChecked}
+                                        onChange={awsCheckedChangeHandler}
+                                        />
+                                    <label className="form-check-label ms-3" htmlFor="aws">
                                         <img src={aws} height="48" width="48" alt="AWS"></img>
                                         <p className="text-center">
                                             <small>AWS</small>
@@ -44,8 +66,14 @@ const NewDesignModal = (props) => {
                                     </label>
                                 </div>
                                 <div className="customCheckbox me-4">
-                                    <input className="form-check-input" type="checkbox" value="azure" id="azure" />
-                                    <label className="form-check-label ms-3" for="azure">
+                                    <input 
+                                        className="form-check-input" 
+                                        type="checkbox" 
+                                        id="azs"
+                                        checked={azsChecked}
+                                        onChange={azsCheckedChangeHandler}
+                                        />
+                                    <label className="form-check-label ms-3" htmlFor="azs">
                                         <img src={azure} height="48" width="48" alt="AZURE"></img>
                                         <p className="text-center">
                                             <small>Azure</small>
@@ -53,8 +81,14 @@ const NewDesignModal = (props) => {
                                     </label>
                                 </div>
                                 <div className="customCheckbox me-4">
-                                    <input className="form-check-input" type="checkbox" value="gc" id="google" />
-                                    <label className="form-check-label ms-3" for="google">
+                                    <input 
+                                        className="form-check-input" 
+                                        type="checkbox"
+                                        id="gcs" 
+                                        checked={gcsChecked}
+                                        onChange={gcsCheckedChangeHandler}
+                                        />
+                                    <label className="form-check-label ms-3" htmlFor="gcs">
                                         <img src={google} height="48" width="48" alt="GC"></img>
                                         <p className="text-center">
                                             <small>Google</small>
