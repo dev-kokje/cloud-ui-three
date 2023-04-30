@@ -2,7 +2,9 @@ import { useState } from "react"
 import aws from "../../../assets/icons/aws.png"
 import azure from "../../../assets/icons/azure.png"
 import google from "../../../assets/icons/google-cloud.png"
-import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { createNewDesign } from "../../../store/designSlice"
+import { useNavigate } from "react-router-dom"
 
 const NewDesignModal = (props) => {
 
@@ -10,6 +12,9 @@ const NewDesignModal = (props) => {
     const [awsChecked, setAwsCheched] = useState(false)
     const [azsChecked, setAzsCheched] = useState(false)
     const [gcsChecked, setGcsCheched] = useState(false)
+    const [showSpinner, setShowSpinner] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const titleChangeHandler = (e) => {
         setTitle(e.target.value)
@@ -25,6 +30,41 @@ const NewDesignModal = (props) => {
 
     const gcsCheckedChangeHandler = () => {
         setGcsCheched(!gcsChecked)
+    }
+
+    const showSpinnerChangeHandler = () => {
+        setShowSpinner(!showSpinner)
+    } 
+
+    const createNewDesignHandler = () => {
+
+        let designTitle = title
+        if(title === "") {
+            designTitle = "Untitled Design"
+        }
+        
+        let providers = []
+        if(awsChecked) providers.push("AWS")
+        if(azsChecked) providers.push("AZS")
+        if(gcsChecked) providers.push("GCS")
+
+        dispatch(createNewDesign({
+            name: designTitle,
+            providers
+        }))
+
+        showSpinnerChangeHandler()
+        setTimeout(() => {
+            showSpinnerChangeHandler()
+            
+            const modal = document.getElementById("newDesignModal")
+            modal.style.display = "none"
+            document.body.classList.remove("modal-open");
+            const backdrop = document.querySelector(".modal-backdrop");
+            backdrop.parentNode.removeChild(backdrop);
+            
+            navigate("/canvas-edit")
+        }, 1000)
     }
 
     return <div className="modal fade" id="newDesignModal" tabIndex="-1" aria-labelledby="newDesignModal" aria-hidden="true">
@@ -102,7 +142,12 @@ const NewDesignModal = (props) => {
             </div>
             <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Create New Design</button>
+                <button type="submit" onClick={createNewDesignHandler} className="btn btn-primary">
+                    Create New Design
+                    {
+                        showSpinner && <span className="ms-2 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    }
+                </button>
             </div>
         </div>
         </div>

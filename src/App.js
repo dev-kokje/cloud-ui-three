@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route path='/canvas-edit' element={ <ProjectEditPage /> } /> */}
+        <Route path='/canvas-edit' element={ <ProjectEditPage /> } />
         <Route path='/*' element={ <LandingPage darkMode={darkMode ? "dark" : "light"} /> } />
       </Routes>
     </>

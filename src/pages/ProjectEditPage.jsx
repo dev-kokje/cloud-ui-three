@@ -1,18 +1,45 @@
-import ProjectTopBar from "../layout/project/ProjectTopBar"
-import ProjectSideBar from "../layout/project/ProjectSideBar"
-import MainCanvas from "../components/Canvas/MainCanvas"
-import SplitPane, { Pane } from 'split-pane-react';
 import 'split-pane-react/esm/themes/default.css'
 import { useState } from "react";
+import ProjectTopBar from '../components/layout/project/ProjectTopBar';
+import ProjectSideBar from '../components/layout/project/ProjectSideBar';
+import SplitPane from 'split-pane-react/esm/SplitPane';
+import { Pane } from 'split-pane-react';
+import MainCanvas from '../components/Canvas/MainCanvas';
 
 const ProjectEditPage = (props) => {
-    
-    const [sizes, setSizes] = useState([
-        '70%',
-        '30%'
-    ]);
 
+    const [sizes, setSizes] = useState(
+        ['80%', '20%'] 
+    )
+    
     return <div>
+        <ProjectTopBar />
+        <div className='container-fluid'>
+            <div className='row vh-100 g-0'>
+                <div className='col-md-2'>
+                    <ProjectSideBar />
+                </div>
+                <div className='col-md-10 px-3'>
+                    <SplitPane
+                        split='horizontal'
+                        sizes={sizes}
+                        onChange={setSizes}
+                    >
+                        <Pane minSize={50} maxSize='80%'>
+                            <div className="row h-100 border-bottom">
+                                <div className='col-md-12'>
+                                    <MainCanvas />
+                                </div>
+                            </div>
+                        </Pane>
+                        <div>
+                            <div className='col-md-12'>
+                            </div>
+                        </div>
+                    </SplitPane>
+                </div>
+            </div>
+        </div>
         {/* <ProjectTopBar fileName="Demo File for dev" />
         <Container fluid className="p-0">
             <Row>

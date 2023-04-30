@@ -51,6 +51,10 @@ display: none;
     border-radius: 0.3rem;
 }
 
+.form-control:focus {
+    box-shadow: none;
+}
+
 // My Image Checkbox
 .form-check-input:focus {
     box-shadow: none;
@@ -58,4 +62,16 @@ display: none;
 
 .form-check-label {
     max-width: 50px;
+}
+
+.custom-form-control {
+    background-color: inherit;
+    border: 1px solid transparent;
+    width: max-content;
+}
+
+.custom-form-control:focus {
+    background-color: inherit;
+    border: 1px solid;
+    box-shadow: none;
 }

@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import designMetadataSlice from "./designMetadataSlice";
+import designSlice from "./designSlice";
 
 export default configureStore({
     reducer: {
-        designMetadata: designMetadataSlice
+        designSlice: designSlice
     }
 })

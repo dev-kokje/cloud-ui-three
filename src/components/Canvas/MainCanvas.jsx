@@ -10,7 +10,7 @@ const MainCanvas = (props) => {
     }
 
     return <Canvas frameloop="demand" camera={camera}>
-        <color attach="background" args={[bgColor]} />
+        {/* <color attach="background" args={[bgColor]} /> */}
         <fog attach="fog" args={["#041830", 5, 15]} />
         <OrbitControls
             minPolarAngle={0}
