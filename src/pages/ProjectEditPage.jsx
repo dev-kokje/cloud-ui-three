@@ -25,17 +25,19 @@ const ProjectEditPage = (props) => {
                         sizes={sizes}
                         onChange={setSizes}
                     >
-                        <Pane minSize={50} maxSize='80%'>
+                        <Pane minSize={50} maxSize='90%'>
                             <div className="row h-100 border-bottom">
                                 <div className='col-md-12'>
                                     <MainCanvas />
                                 </div>
                             </div>
                         </Pane>
-                        <div>
-                            <div className='col-md-12'>
+                        <Pane>
+                            <div className="row">
+                                <div className='col-md-12'>
+                                </div>
                             </div>
-                        </div>
+                        </Pane>
                     </SplitPane>
                 </div>
             </div>

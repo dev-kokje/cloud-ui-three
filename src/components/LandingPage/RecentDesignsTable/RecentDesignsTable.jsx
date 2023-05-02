@@ -27,9 +27,9 @@ const MenuDropdown = () => {
             <i className="bi bi-three-dots"></i>
         </button>
         <ul className="dropdown-menu pb-4">
-            <li><a className="dropdown-item ht-40" href="#"><i className="bi bi-pencil"></i> Edit</a></li>
-            <li><a className="dropdown-item ht-40" href="#"><i className="bi bi-clipboard-plus"></i> Make Copy</a></li>
-            <li><a className="dropdown-item ht-40" href="#"><i className="bi bi-trash"></i> Trash</a></li>
+            <li><a className="dropdown-item ht-40" href="/home"><i className="bi bi-pencil"></i> Edit</a></li>
+            <li><a className="dropdown-item ht-40" href="/home"><i className="bi bi-clipboard-plus"></i> Make Copy</a></li>
+            <li><a className="dropdown-item ht-40" href="/home"><i className="bi bi-trash"></i> Trash</a></li>
         </ul>
     </div>
 }
