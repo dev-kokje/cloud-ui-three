@@ -1,11 +1,13 @@
 import avatar from "../../../assets/img/avatar.png"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { ThemeContext } from "../../../context/ThemeContext"
 import NewDesignModal from "../../LandingPage/NewDesignModal/NewDesignModal"
+import LoginModal from "../../Auth/LoginModal"
 
 const TopBar = (props) => {
 
     const { darkMode, toggleColorMode } = useContext(ThemeContext)
+    const [user, setUser] = useState(false)
 
     return <nav className="navbar navbar-expand-lg bg-body-tertiary p-3">
         <div className="container-fluid">
@@ -29,23 +31,31 @@ const TopBar = (props) => {
                     <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newDesignModal">Create New Design</button>
                 </li>
                 <NewDesignModal />
-                <li className="nav-item dropdown me-3">
-                    <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src={avatar} alt="mdo" width="40" height="40" className="rounded-circle"></img>
-                    </button>
-                    <ul className="dropdown-menu dropdown-menu-end py-3 px-1">
-                        <li className="dropdown-item">
-                            <p className="fs-5 m-0">Rahul Kokje</p>
-                            <p className="fw-lighter m-0"><small>rahulkokje1097@gmail.com</small></p>
-                        </li>
-                        <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="/">User Profile</a></li>
-                        <li><a className="dropdown-item" href="/">App Demo</a></li>
-                        <li><a className="dropdown-item" href="/">App Settings</a></li>
-                        <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="/">Signout</a></li>
-                    </ul>
-                </li>
+                {
+                    user && <li className="nav-item dropdown me-3">
+                        <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src={avatar} alt="mdo" width="40" height="40" className="rounded-circle"></img>
+                        </button>
+                        <ul className="dropdown-menu dropdown-menu-end py-3 px-1">
+                            <li className="dropdown-item">
+                                <p className="fs-5 m-0">Rahul Kokje</p>
+                                <p className="fw-lighter m-0"><small>rahulkokje1097@gmail.com</small></p>
+                            </li>
+                            <li><hr className="dropdown-divider" /></li>
+                            <li><a className="dropdown-item" href="/">User Profile</a></li>
+                            <li><a className="dropdown-item" href="/">App Demo</a></li>
+                            <li><a className="dropdown-item" href="/">App Settings</a></li>
+                            <li><hr className="dropdown-divider" /></li>
+                            <li><a className="dropdown-item" href="/">Signout</a></li>
+                        </ul>
+                    </li>
+                }
+                {
+                    !user && <li className="nav-item d-flex align-items-center me-3">
+                        <button className={darkMode ? "btn btn-outline-light" : "btn btn-outline-dark"} data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    </li>
+                }
+                <LoginModal darkMode={darkMode} />
             </ul>
             </div>
         </div>

@@ -69,7 +69,7 @@ const NewDesignModal = (props) => {
 
     return <div className="modal fade" id="newDesignModal" tabIndex="-1" aria-labelledby="newDesignModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div className="modal-content rounded-1">
+        <div className="modal-content rounded-4">
             <div className="modal-header">
             <h1 className="modal-title fs-5" id="newDesignModalLabel">New Design Details</h1>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

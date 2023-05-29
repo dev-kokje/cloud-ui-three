@@ -52,6 +52,8 @@ display: none;
 }
 
 .form-control:focus {
+    border: 1px solid #555;
+    border-bottom: 1px solid #888 !important;
     box-shadow: none;
 }
 

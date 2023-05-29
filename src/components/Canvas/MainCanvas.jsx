@@ -25,7 +25,9 @@ const MainCanvas = (props) => {
 
     return <Canvas name="mainCanvas" ref={ref} frameloop="demand" camera={camera} onClick={handleClick}>
         {/* <fog attach="fog" args={["#041830", 5, 15]} /> */}
-        <ElementTypeOne id="e1" position={[1, 0.25, 1]} color="#f56f42" setDragging={handleDragging} />
+        <ElementTypeOne position={[1, 0.25, 1]} color="#f56f42" setDragging={handleDragging} />
+        <ElementTypeOne position={[2.5, 0.25, 1]} color="#f56f42" setDragging={handleDragging} />
+        <ElementTypeOne position={[4, 0.25, 1]} color="#f56f42" setDragging={handleDragging} />
         <OrbitControls
             minPolarAngle={0}
             maxPolarAngle={Math.PI / 2}

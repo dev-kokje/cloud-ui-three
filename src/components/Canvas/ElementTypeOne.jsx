@@ -25,7 +25,6 @@ const ElementTypeOne = (props) => {
                 onDragStart={() => props.setDragging(true)}
                 onDragEnd={() => props.setDragging(false)}
                 activeAxes={[true, false, true]}
-                autoTransform
                 visible={showControls}
                 onClick={handleOnClick}
                 onPointerMissed={handleOutsideClick}
@@ -33,10 +32,10 @@ const ElementTypeOne = (props) => {
             <mesh 
                 ref={ref} 
                 material={red} 
-                geometry={ec2([1, 0.5, 1])} 
                 position={props.position}   
                 >
-        </mesh>
+                    <boxGeometry args={[1, 1, 1]} />
+            </mesh>
     </PivotControls> 
 }
 
