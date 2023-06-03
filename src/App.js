@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import ProjectEditPage from './pages/ProjectEditPage';
 import { useContext, useEffect } from 'react';
 import { ThemeContext } from './context/ThemeContext';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
 
@@ -17,8 +18,18 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/canvas-edit' element={ <ProjectEditPage /> } />
-        <Route path='/*' element={ <LandingPage darkMode={darkMode ? "dark" : "light"} /> } />
+        <Route 
+            path='/canvas-edit' 
+            element={ 
+              <ProjectEditPage />
+            } 
+          />
+        <Route 
+            path='/*' 
+            element={ 
+              <LandingPage darkMode={darkMode ? "dark" : "light"} /> 
+            } 
+          />
       </Routes>
     </>
   );

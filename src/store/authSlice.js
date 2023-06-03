@@ -3,32 +3,22 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
     name: 'authSlice',
     initialState: {
-        loading: false,
         userInfo: null,
-        userToken: null,
-        error: null,
-        success: false
+        idToken: null,
+        accessToken: null,
+        refreshToken: null
     },
     reducers: {
-        googleLoginSetToken: (state, data) => {
-            state.loading = false
-            state.error = null
-            state.success = true
-            state.userToken = data.payload.access_token
-        },
-        googleLoginSetUser: (state, data) => {
-            state.userInfo = data.payload
-        },
-        logoutGoogle: (state, data) => {
-            state.loading = false
-            state.userInfo = null
-            state.userToken = null
-            state.error = null
-            state.success = false
-        } 
+        loginUser: (state, data) => {
+            state.idToken = data.payload.idToken
+            state.accessToken = data.payload.accessToken
+            state.refreshToken = data.refreshToken
+        } ,
+        loadUserData: (state) => {
+        }
     }
 })
 
-export const { googleLoginSetToken, googleLoginSetUser, logoutGoogle } = authSlice.actions
+export const { loginUser } = authSlice.actions
 
 export default authSlice.reducer

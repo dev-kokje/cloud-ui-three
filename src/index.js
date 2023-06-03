@@ -8,12 +8,13 @@ import ThemeProvider from './context/ThemeContext';
 import "@fontsource/roboto";
 import { Provider } from 'react-redux';
 import store from './store/store';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ReactKeycloakProvider } from '@react-keycloak/web';
+import keycloak from './helpers/auth/keycloak';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
-    <GoogleOAuthProvider
-      clientId="998815757024-m3ddk2elb9k5rrhubglml1duu4sj99n6.apps.googleusercontent.com"
+    <ReactKeycloakProvider
+      authClient={keycloak}
     >
       <React.StrictMode>
         <Provider store={store}>
@@ -24,5 +25,5 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
           </ThemeProvider>
         </Provider>
       </React.StrictMode>
-    </GoogleOAuthProvider>
+    </ReactKeycloakProvider>
 );

@@ -1,7 +1,5 @@
-import { useGoogleLogin } from "@react-oauth/google"
 import googleIcon from "../../assets/icons/google.png"
 import { useDispatch, useSelector } from "react-redux"
-import { googleLoginSetToken, googleLoginSetUser } from "../../store/authSlice"
 import { useEffect } from "react"
 import axios from "axios"
 
@@ -10,15 +8,16 @@ const LoginModal = (props) => {
     const user = useSelector((state) => state.authSlice)
     const dispatch = useDispatch()
 
-    const login = useGoogleLogin({
-        onSuccess: (tokenResponse) => dispatch(googleLoginSetToken(tokenResponse)),
-        onError: () => console.log("Login Failed")
-    })
-
-    const loginClick = (e) => {
+    const login = (e) => {
         e.preventDefault()
-        login()
+        axios
+            .get(`http://localhost:8080/signup`)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => console.log(err));
     }
+
 
     useEffect(
         () => {
@@ -31,7 +30,14 @@ const LoginModal = (props) => {
                         }
                     })
                     .then((res) => {
-                        dispatch(googleLoginSetUser(res.data));
+                        console.log(res.data);
+                    })
+                    .catch((err) => console.log(err));
+                
+                axios
+                    .get(`http://localhost:8080/signup`)
+                    .then((res) => {
+                        console.log(res)
                     })
                     .catch((err) => console.log(err));
             }
@@ -88,7 +94,7 @@ const LoginModal = (props) => {
                                 <small className="text-secondary">--- or ---</small>
                             </div>
                             <div className="col-md-11 mb-2">
-                                <button className="btn btn-outline-primary w-100" onClick={loginClick}>
+                                <button className="btn btn-outline-primary w-100" onClick={login}>
                                     <img src={googleIcon} alt="googleIcon" width={25} height={25} className="mx-2" style={{marginTop: "-3px"}}></img>
                                     <span>Login with Google</span>
                                 </button>

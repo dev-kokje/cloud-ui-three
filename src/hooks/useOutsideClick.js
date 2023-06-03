@@ -7,8 +7,6 @@ export const useOutsideClick = (ref, callback) => {
             event.stopPropagation()
             if(ref.current) {
                 callback()
-                console.log(event.target)
-                console.log(ref.current)
             }
         }
 
