@@ -32,7 +32,7 @@ const RecentDesignsList = (props) => {
             error && <div className="col-md-11 fw-bold mt-4">
                 <div className="alert alert-danger text-center" role="alert">
                     <small>
-                        Oops ! Error occured while fetching your data. Please check if the Backend is up.
+                        Oops ! Error occured while fetching your data. Please check if the Backend is running.
                         <i class="mx-2 bi bi-emoji-neutral"></i>
                     </small>
                 </div>   
