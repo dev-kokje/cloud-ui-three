@@ -16,14 +16,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
     <ReactKeycloakProvider
       authClient={keycloak}
     >
-      <React.StrictMode>
-        <Provider store={store}>
-          <ThemeProvider>
-            <BrowserRouter>
-                <App />
-              </BrowserRouter>
-          </ThemeProvider>
-        </Provider>
-      </React.StrictMode>
+      <Provider store={store}>
+        <ThemeProvider>
+          <BrowserRouter>
+              <App />
+            </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
     </ReactKeycloakProvider>
 );

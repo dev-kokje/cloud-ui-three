@@ -3,8 +3,9 @@ import aws from "../../../assets/icons/aws.png"
 import azure from "../../../assets/icons/azure.png"
 import google from "../../../assets/icons/google-cloud.png"
 import { useDispatch } from "react-redux"
-import { createNewDesign } from "../../../store/designSlice"
+import { setDesign } from "../../../store/designSlice"
 import { useNavigate } from "react-router-dom"
+import { saveNewDesign } from "../../../api/design-api"
 
 const NewDesignModal = (props) => {
 
@@ -36,7 +37,17 @@ const NewDesignModal = (props) => {
         setShowSpinner(!showSpinner)
     } 
 
+    const hideModal = () => {
+        const modal = document.getElementById("newDesignModal")
+        modal.style.display = "none"
+        document.body.classList.remove("modal-open");
+        const backdrop = document.querySelector(".modal-backdrop");
+        backdrop.parentNode.removeChild(backdrop);
+    }
+
     const createNewDesignHandler = () => {
+
+        showSpinnerChangeHandler()
 
         let designTitle = title
         if(title === "") {
@@ -45,26 +56,27 @@ const NewDesignModal = (props) => {
         
         let providers = []
         if(awsChecked) providers.push("AWS")
-        if(azsChecked) providers.push("AZS")
+        if(azsChecked) providers.push("Azure")
         if(gcsChecked) providers.push("GCS")
 
-        dispatch(createNewDesign({
+        saveNewDesign({
+            userId: "123",
             name: designTitle,
-            providers
-        }))
-
-        showSpinnerChangeHandler()
-        setTimeout(() => {
-            showSpinnerChangeHandler()
-            
-            const modal = document.getElementById("newDesignModal")
-            modal.style.display = "none"
-            document.body.classList.remove("modal-open");
-            const backdrop = document.querySelector(".modal-backdrop");
-            backdrop.parentNode.removeChild(backdrop);
-            
-            navigate("/canvas-edit")
-        }, 1000)
+            providers: providers
+        })
+        .then(response => {
+                dispatch(
+                    setDesign({
+                        name: response.data.name,
+                        providers: response.data.providers
+                    })
+                )
+                showSpinnerChangeHandler()
+                hideModal()
+                navigate("/canvas-edit")
+            }
+        )
+        .catch(err => console.log(err))
     }
 
     return <div className="modal fade" id="newDesignModal" tabIndex="-1" aria-labelledby="newDesignModal" aria-hidden="true">

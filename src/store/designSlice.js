@@ -7,13 +7,13 @@ export const designSlice = createSlice({
         providers: []
     },
     reducers: {
-        createNewDesign: (state, data) => {
+        setDesign: (state, data) => {
             state.name = data.payload.name
             state.providers = [...data.payload.providers]
         }
     }
 })
 
-export const { createNewDesign } = designSlice.actions
+export const { setDesign } = designSlice.actions
 
 export default designSlice.reducer

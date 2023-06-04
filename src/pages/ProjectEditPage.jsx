@@ -42,39 +42,6 @@ const ProjectEditPage = (props) => {
                 </div>
             </div>
         </div>
-        {/* <ProjectTopBar fileName="Demo File for dev" />
-        <Container fluid className="p-0">
-            <Row>
-                <Col md={2} className="p-0">
-                    <ProjectSideBar />
-                </Col>
-                <Col md={10} className="p-0">
-                    <SplitPane
-                        split='horizontal'
-                        sizes={sizes}
-                        onChange={setSizes}
-                    >
-                        <Pane minSize={50} maxSize='80%'>
-                            <Row className="h-100 border-bottom">
-                                <Col md={12}>
-                                    <MainCanvas />
-                                </Col>
-                            </Row>
-                        </Pane>
-                        <Row>
-                            <Col md={12}>
-                            </Col>
-                        </Row>
-                    </SplitPane>
-                    
-                    <Row>
-                        <Col md={12}>
-                            
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </Container> */}
     </div>
 }
 
