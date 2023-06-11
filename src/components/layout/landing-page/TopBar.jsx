@@ -9,7 +9,7 @@ import { loginUser } from "../../../store/authSlice"
 
 const TopBar = (props) => {
 
-    const { keycloak, initialized } = useKeycloak()
+    const { keycloak, } = useKeycloak()
     const dispatch = useDispatch()
 
     const { darkMode, toggleColorMode } = useContext(ThemeContext)

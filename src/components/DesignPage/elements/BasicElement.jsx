@@ -1,16 +1,35 @@
 import { Suspense, lazy } from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../../../helpers/ItemTypes';
+import { useDispatch } from 'react-redux';
+import { addDesignElement } from '../../../store/designSlice';
 
 const BasicElement = (props) => {
 
+    const dispatch = useDispatch()
+
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemTypes.ELEMENT_CARD,
-        item: { shortName: props.shortName },
+        item: { 
+            type: ItemTypes.ELEMENT_CARD,
+            data: {
+                resource: {
+                    name: 'ec2',
+                    type: ''
+                },
+                position: {
+                    left: 200,
+                    top: 200
+                }
+            }},
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult()
             if(item && dropResult) {
-                alert(`You dropped ${item.shortName} into ${dropResult.name}!`)
+                const randomId = Date.now()
+                const dropItem = {
+                    [randomId]: item.data
+                }
+                dispatch(addDesignElement(dropItem))
             }
         },
         collect: (monitor) => ({

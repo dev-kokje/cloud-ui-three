@@ -33,7 +33,7 @@ const RecentDesignsList = (props) => {
                 <div className="alert alert-danger text-center" role="alert">
                     <small>
                         Oops ! Error occured while fetching your data. Please check if the Backend is running.
-                        <i class="mx-2 bi bi-emoji-neutral"></i>
+                        <i className="mx-2 bi bi-emoji-neutral"></i>
                     </small>
                 </div>   
             </div>

@@ -12,7 +12,7 @@ import { ItemTypes } from "../../helpers/ItemTypes"
 const MainCanvas = (props) => {
 
     // Drop effect
-    const [{ canDrop, isOver }, drop] = useDrop(() => ({
+    const [, drop] = useDrop(() => ({
         accept: ItemTypes.ELEMENT_CARD,
         drop: () => ({ name: "Canvas" }),
         collect: (monitor) => ({

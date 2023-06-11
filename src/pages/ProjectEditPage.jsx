@@ -6,9 +6,9 @@ import SplitPane from 'split-pane-react/esm/SplitPane';
 import { Pane } from 'split-pane-react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import Canvas2D from '../components/2DCanvas/Canvas2D';
 import DesignToolbar from '../components/DesignPage/DesignToolbar';
 import MainCanvas from '../components/Canvas/MainCanvas';
+import Canvas2D from '../components/Canvas/Canvas2D/Canvas2D'
 
 const ProjectEditPage = (props) => {
 

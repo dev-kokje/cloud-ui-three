@@ -5,24 +5,35 @@ export const designSlice = createSlice({
     initialState: {
         name: '',
         providers: [],
-        elements: [{
-            id: "123",
-            name: "aws-ec2",
-            position: [0, 0]
-        }]
+        elements: {
+            '1': {
+                resource: {
+                    name: 'ec2',
+                    type: ''
+                },
+                position: {
+                    top: 220,
+                    left: 300
+                }
+            }
+        }
     },
     reducers: {
         setDesign: (state, data) => {
             state.name = data.payload.name
             state.providers = [...data.payload.providers]
         },
-        addElement: (state, data) => {
-            state.elements = state.elements.push(data.payload)
+        addDesignElement: (state, data) => {
+            console.log(data.payload)
+            Object.keys(data.payload).map((key) => {
+                state.elements[key] = data.payload[key]
+                return ''
+            })
         }
     }
 })
 
-export const { setDesign, addElement } = designSlice.actions
+export const { setDesign, addDesignElement } = designSlice.actions
 
 export default designSlice.reducer
 

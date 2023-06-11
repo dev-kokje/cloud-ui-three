@@ -1,13 +1,20 @@
 import { useDrag } from "react-dnd"
-import { Ec2Instance } from "../icons/aws/ec2/ec2"
-import { ItemTypes } from "../../helpers/ItemTypes"
+import { ItemTypes } from "../../../helpers/ItemTypes"
+import { ec2 } from "../../icons/aws/ec2/ec2"
 
-const Element2D = ({ id, left, top, hideSourceOnDrag, children }) => {
+const Element2D = ({ id, left, top, resource, hideSourceOnDrag }) => {
+
+    const style = {
+        position: 'absolute',
+        cursor: 'move',
+        height: '50px', 
+        width: '50px'
+    }
 
     const [{ isDragging }, drag] = useDrag(
         () => ({
             type: ItemTypes.ELEMENT_2D,
-            item: { id, left, top },
+            item: { id, left, top, type: ItemTypes.ELEMENT_2D },
             collect: (monitor) => ({
                 isDragging: monitor.isDragging(),
             }),
@@ -22,10 +29,10 @@ const Element2D = ({ id, left, top, hideSourceOnDrag, children }) => {
     return <div 
         className="card"
         ref={drag} 
-        style={{ height: '50px', width: '50px' }}
+        style={{ ...style, left, top }}
         dara-testid="element-2d"
         >
-        { Ec2Instance }
+            { resource.type === '' ? ec2['default'] : ec2[resource.type] }
     </div>
 }
 
