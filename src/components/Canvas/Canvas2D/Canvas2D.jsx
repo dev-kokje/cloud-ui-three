@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Element2D from "./Element2D.jsx"
 import update from "immutability-helper"
 import { addDesignElement } from "../../../store/designSlice"
+import ResourceDetails from "../ResourceDetails/ResourceDetails"
 
 const Canvas2D = (props) => {
 
@@ -66,6 +67,7 @@ const Canvas2D = (props) => {
     return <div style={{ width: '100%' }} ref={drop} data-testid="Canvas2D">
         <div className="row d-flex justify-content-center w-100 h-100" style={{ backgroundColor: darkMode ? '#222' : '#efefef' }}>
             <div className="col-md-12 canvas-bg d-block" style={gridBg}>
+                <ResourceDetails />
                 {
                     Object.keys(elements).map((key) => {
                         const element = elements[key]

@@ -57,6 +57,10 @@ display: none;
     box-shadow: none;
 }
 
+.container-fluid {
+    padding-right: 0 !important;
+}
+
 // My Image Checkbox
 .form-check-input:focus {
     box-shadow: none;
@@ -85,4 +89,17 @@ display: none;
 .size-0 {
     height: 1px;
     width: 1px;
+}
+
+.sidebar {
+    background-color: var(--bs-body-bg);
+}
+
+// Custom navs
+.custom-nav:hover {
+    cursor: pointer;
+}
+
+.custom-nav.active {
+    border-bottom: none !important;
 }
