@@ -14,11 +14,6 @@ const Canvas2D = (props) => {
     const elements = useSelector((state) => state.designSlice.elements)
     const dispatch = useDispatch()
 
-    // const [boxes, setBoxes] = useState({
-    //     a: { top: 120, left: 80 },
-    //     b: { top: 180, left: 20 },
-    // })
-
     const moveElement = useCallback(
         (id, left, top) => {
             dispatch(addDesignElement(
