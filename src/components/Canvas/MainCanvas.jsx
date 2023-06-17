@@ -42,22 +42,24 @@ const MainCanvas = (props) => {
         setDragControls(true)
     }
 
-    return <Canvas ref={drop} name="mainCanvas" frameloop="demand" camera={camera} onClick={handleClick} data-testid="Canvas">
-        {/* <fog attach="fog" args={["#041830", 5, 20]} /> */}
-        <BottomPlane 
-            position={[0, -0.1, 0]}
-            color={darkMode ? "#333" : "white"}
+    return <>
+        <Canvas ref={drop} name="mainCanvas" frameloop="demand" camera={camera} onClick={handleClick} data-testid="Canvas">
+            {/* <fog attach="fog" args={["#041830", 5, 20]} /> */}
+            <BottomPlane 
+                position={[0, -0.1, 0]}
+                color={darkMode ? "#333" : "white"}
+                />
+            <BasicElement position={[0, 0.25, 0]} disableControls={disableControls} enableControls={enableControls} />
+            <OrbitControls
+                minPolarAngle={0}
+                maxPolarAngle={Math.PI / 2}
+                enabled={dragControls}
             />
-        <BasicElement position={[0, 0.25, 0]} disableControls={disableControls} enableControls={enableControls} />
-        <OrbitControls
-            minPolarAngle={0}
-            maxPolarAngle={Math.PI / 2}
-            enabled={dragControls}
-        />
-        <gridHelper args={[20, 20, 0xaaaaaa]} />
-        <directionalLight color="#ffffff" intensity={1} position={[-1, 2, 4]} />
-        <axesHelper scale={20} />
-    </Canvas>
+            <gridHelper args={[20, 20, 0xaaaaaa]} />
+            <directionalLight color="#ffffff" intensity={1} position={[-1, 2, 4]} />
+            <axesHelper scale={20} />
+        </Canvas>
+    </>
 }
 
 export default MainCanvas

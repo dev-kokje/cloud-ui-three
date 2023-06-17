@@ -2,13 +2,14 @@ import { useDrag } from "react-dnd"
 import { ItemTypes } from "../../../helpers/ItemTypes"
 import { ec2 } from "../../icons/aws/ec2/ec2"
 
-const Element2D = ({ id, left, top, resource, hideSourceOnDrag }) => {
+const Element2D = ({ id, left, top, resource, hideSourceOnDrag, selectedElement, handleElementSelection }) => {
 
     const style = {
         position: 'absolute',
         cursor: 'move',
         height: '50px', 
-        width: '50px'
+        width: '50px',
+        borderColor: (selectedElement !== null && selectedElement.id === id) ? '#000' : ''
     }
 
     const [{ isDragging }, drag] = useDrag(
@@ -22,6 +23,13 @@ const Element2D = ({ id, left, top, resource, hideSourceOnDrag }) => {
         [id, left, top]
     )
 
+    const selectThisElement = () => {
+        const element = {
+            id: id
+        }
+        handleElementSelection(element)
+    }
+
     if(isDragging && hideSourceOnDrag) {
         return <div ref={drag} />
     }
@@ -31,6 +39,7 @@ const Element2D = ({ id, left, top, resource, hideSourceOnDrag }) => {
         ref={drag} 
         style={{ ...style, left, top }}
         dara-testid="element-2d"
+        onClick={selectThisElement}
         >
             { resource.type === '' ? ec2['default'] : ec2[resource.type] }
     </div>

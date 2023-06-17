@@ -4,7 +4,7 @@ import { ItemTypes } from '../../../helpers/ItemTypes';
 import { useDispatch } from 'react-redux';
 import { addDesignElement } from '../../../store/designSlice';
 
-const BasicElement = (props) => {
+const ElementCard = (props) => {
 
     const dispatch = useDispatch()
 
@@ -15,7 +15,9 @@ const BasicElement = (props) => {
             data: {
                 resource: {
                     name: 'ec2',
-                    type: ''
+                    type: 'Ec2C4Instance',
+                    shortName: props.shortName,
+                    fullName: props.fullName,
                 },
                 position: {
                     left: 200,
@@ -38,44 +40,36 @@ const BasicElement = (props) => {
         }),
     }))    
 
-    const Icon = lazy(() => import(`react-aws-icons/dist/aws/logo/${props.icon}`))
-    let bagdeStyle = "text-bg-primary"
-
-    switch(props.category) {
-        case "Compute": break;
-        case "Storage": bagdeStyle = "text-bg-success"; break;
-        case "Container Orchastration": bagdeStyle = "text-bg-danger"; break;
-        default: break;
-    }
+    const Icon = lazy(() => import(`react-aws-icons/dist/aws/${props.icon}`))
 
     return <div 
         ref={drag} 
-        className="card w-100 mb-3 stretched-link" 
+        className="card w-100 mb-2 stretched-link" 
         style={{ opacity: isDragging ? 0.4 : 1 }} 
         onClick={() => console.log("Click")}
         data-testid={`element-card`}
         >
         <div className="card-body p-0">
-            <div className="row g-0 py-1">
+            <div className="row g-0 d-flex justify-content-center">
                 <Suspense fallback={<div>Hi, This page is Loading...</div>}>
-                    <div className="col-md-4 d-flex justify-content-end align-items-center">
-                        <Icon size={32} />
+                    <div className="col-md-2 d-flex justify-content-end align-items-center">
+                        <Icon size={42} />
                     </div>
                 </Suspense>
                 <div className="col-md-8 p-2">
                     <p className='fs-6 p-0 m-0'>{props.shortName}</p>
-                    {/* <p className='text-muted p-0 m-0'>
-                        <small>{props.fullName}</small>
-                    </p> */}
+                    <p className='text-secondary p-0 m-0' style={{ fontSize: "11px" }}>
+                        {props.fullName}
+                    </p>
                 </div>
             </div>       
-            <div className="row g-0">
-                <span style={{borderRadius: "0px 0px 5px 5px"}} className={"badge " + bagdeStyle}>
-                    <small>{props.category}</small>
+            <div style={{ position: 'absolute', top: '0', right: '0' }}>
+                <span style={{borderRadius: "0px 0px 5px 5px"}} className="badge text-primary">
+                    <small>AWS</small>
                 </span>
             </div>
         </div>
     </div>
 }
 
-export default BasicElement
+export default ElementCard

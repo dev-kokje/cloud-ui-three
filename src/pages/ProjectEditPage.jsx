@@ -7,13 +7,12 @@ import { Pane } from 'split-pane-react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DesignToolbar from '../components/DesignPage/DesignToolbar';
-import MainCanvas from '../components/Canvas/MainCanvas';
-import Canvas2D from '../components/Canvas/Canvas2D/Canvas2D'
+import Canvas from '../components/Canvas/Canvas';
 
 const ProjectEditPage = (props) => {
 
     const [sizes, setSizes] = useState(
-        ['80%', '20%'] 
+        ['82%', '18%'] 
     )
     const [canvas2D, setCanvas2D] =  useState(false)
     
@@ -35,9 +34,7 @@ const ProjectEditPage = (props) => {
                         >
                             <Pane className='d-flex' minSize={50} maxSize='90%'>
                                 <div className='container-fluid d-flex'>
-                                    {
-                                        canvas2D ? <Canvas2D /> : <MainCanvas />
-                                    }
+                                    <Canvas canvas2D={canvas2D} />
                                 </div>
                             </Pane>
                             <Pane>

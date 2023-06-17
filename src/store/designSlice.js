@@ -5,18 +5,7 @@ export const designSlice = createSlice({
     initialState: {
         name: '',
         providers: [],
-        elements: {
-            '1': {
-                resource: {
-                    name: 'ec2',
-                    type: ''
-                },
-                position: {
-                    top: 220,
-                    left: 300
-                }
-            }
-        }
+        elements: {}
     },
     reducers: {
         setDesign: (state, data) => {
@@ -36,11 +25,3 @@ export const designSlice = createSlice({
 export const { setDesign, addDesignElement } = designSlice.actions
 
 export default designSlice.reducer
-
-
-// Element can have following properties
-// {
-//     id: String,
-//     name: String,
-//     position: []
-// }

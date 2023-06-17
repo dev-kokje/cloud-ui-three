@@ -1,9 +1,10 @@
 import { useContext, useState } from "react"
 import { ThemeContext } from "../../../context/ThemeContext"
 import ProjectDetailsWindow from "./ProjectDetailsWindow"
+import ResourceDetailsWindow from "./ResourceDetailsWindow"
 
 
-const ResourceDetails = (props) => {
+const ResourceDetails = ({ selectedElement }) => {
 
     const { darkMode } = useContext(ThemeContext)
     const [show, setShow] = useState(true)
@@ -15,7 +16,7 @@ const ResourceDetails = (props) => {
         width: '20rem',
         height: '92%',
         transition: '0.5s',
-        right: '-0.95rem'
+        right: '-0.50rem'
     }
     
     const hiddenStyle = {
@@ -55,6 +56,7 @@ const ResourceDetails = (props) => {
                 </div>
             </div>
             { activeWindow === '1' && <ProjectDetailsWindow /> }
+            { activeWindow === '2' && <ResourceDetailsWindow /> }
         </div>
     </div>
 }
