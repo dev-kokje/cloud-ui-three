@@ -72,7 +72,7 @@ const Canvas2D = ({ selectedElement, handleElementSelection }) => {
                             resource={element.resource}
                             hideSourceOnDrag={true}
                             selectedElement={selectedElement}
-                            handleElementSelection={handleElementSelection}
+                            handleElementSelection={(element) => handleElementSelection(element)}
                         />
                     })
                 }

@@ -2,23 +2,23 @@ import ElementCard from "./ElementCard"
 
 const ElementsPanel = ({ elements }) => {
 
-    var elementsKeys = Object.keys(elements)
+    console.log(elements)
 
     return <>
         <div className="accordion mb-4" id="elementsAccordion">
             {
                 //console.log(Object.keys(elements))
                 
-                elementsKeys.map((key, index) => <div className="accordion-item" key={index}>
+                elements.map((elementGroup, index) => <div className="accordion-item" key={index}>
                         <h2 className="accordion-header" id="headingOne">
                             <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                { elements[key].name }
+                                { elementGroup.name }
                             </button>
                         </h2>
                         <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div className="accordion-body overflow-auto" style={{ maxHeight: "70vh" }}>
                                 {
-                                    (elements[key].categories).map((category, index2) => <div className="row d-flex justify-content-center" key={index2}>
+                                    (elementGroup.categories).map((category, index2) => <div className="row d-flex justify-content-center" key={index2}>
                                             <div className="col-md-11 pb-2 px-0">
                                                 { category.name }
                                                 { category.alternateName === "" ? "" : ` (${category.alternateName})` }

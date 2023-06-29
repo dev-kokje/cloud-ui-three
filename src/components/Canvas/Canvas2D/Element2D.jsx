@@ -25,7 +25,8 @@ const Element2D = ({ id, left, top, resource, hideSourceOnDrag, selectedElement,
 
     const selectThisElement = () => {
         const element = {
-            id: id
+            id: id,
+            resource: resource
         }
         handleElementSelection(element)
     }

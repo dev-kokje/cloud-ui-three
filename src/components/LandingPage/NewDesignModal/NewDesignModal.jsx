@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import { setDesign } from "../../../store/designSlice"
 import { useNavigate } from "react-router-dom"
 import { saveNewDesign } from "../../../api/design-api"
+import { useKeycloak } from "@react-keycloak/web"
 
 const NewDesignModal = (props) => {
 
@@ -16,6 +17,7 @@ const NewDesignModal = (props) => {
     const [showSpinner, setShowSpinner] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { keycloak } = useKeycloak()
 
     const titleChangeHandler = (e) => {
         setTitle(e.target.value)
@@ -63,7 +65,7 @@ const NewDesignModal = (props) => {
             userId: "123",
             name: designTitle,
             providers: providers
-        })
+        }, keycloak.token)
         .then(response => {
                 dispatch(
                     setDesign({

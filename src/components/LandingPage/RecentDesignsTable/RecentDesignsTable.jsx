@@ -122,6 +122,7 @@ const RecentDesignsTable = ({recentDesigns, deleteItem}) => {
                             case "AWS": return <ProviderBadge key={index} image={awsIcon} />
                             case "Azure": return <ProviderBadge key={index} image={azureIcon} />
                             case "GCS": return <ProviderBadge key={index} image={gcpIcon} />
+                            case "GCP": return <ProviderBadge key={index} image={gcpIcon} />
                             default: return <></>
                         }
                     })

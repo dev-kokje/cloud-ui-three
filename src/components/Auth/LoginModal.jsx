@@ -1,49 +1,54 @@
+import { useState } from "react"
 import googleIcon from "../../assets/icons/google.png"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
-import axios from "axios"
+import { useKeycloak } from "@react-keycloak/web"
+//import axios from "axios"
 
 const LoginModal = (props) => {
 
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const user = useSelector((state) => state.authSlice)
-    const dispatch = useDispatch()
 
-    const login = (e) => {
-        e.preventDefault()
-        axios
-            .get(`http://localhost:8080/signup`)
-            .then((res) => {
-                console.log(res)
+    // const usernamePasswordLogin = (event) => {
+
+    //     event.preventDefault()
+
+    //     console.log("Logging in USER")
+    //     const API_BASE_URL = "http://localhost:8080"
+
+    //     const url = API_BASE_URL + "/realms/cloud-ui-three/protocol/openid-connect/token"
+    //     const headers = {
+    //         'Content-Type': 'application/x-www-form-urlencoded'
+    //     }
+    //     const data = new URLSearchParams()
+    //     data.append('client_id', 'frontend')
+    //     data.append('grant_type', 'password')
+    //     data.append('username', email)
+    //     data.append('password', password)
+
+    //     axios.post(url, data, { headers })
+    //     .then(response => {
+    //         console.log('Response:', response.data);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //     })
+    // }
+
+    const { keycloak } = useKeycloak()
+    const handleUsernamePasswordLogin = async (event) => {
+        event.preventDefault()
+
+        try {
+            await keycloak.login({
+                email,
+                password
             })
-            .catch((err) => console.log(err));
+        } catch(error) {
+            console.log("Login Failed")
+        }
     }
-
-
-    useEffect(
-        () => {
-            if (user.userToken && !user.userInfo) {
-                axios
-                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.userToken}`, {
-                        headers: {
-                            Authorization: `Bearer ${user.userToken}`,
-                            Accept: 'application/json'
-                        }
-                    })
-                    .then((res) => {
-                        console.log(res.data);
-                    })
-                    .catch((err) => console.log(err));
-                
-                axios
-                    .get(`http://localhost:8080/signup`)
-                    .then((res) => {
-                        console.log(res)
-                    })
-                    .catch((err) => console.log(err));
-            }
-        },
-        [ user, dispatch ]
-    );
 
     return <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="loginModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -73,14 +78,20 @@ const LoginModal = (props) => {
                                     type="text" 
                                     className="form-control border-none border-bottom rounded-sm" 
                                     id="email" 
-                                    placeholder="Enter Email / Phone No" />
+                                    placeholder="Enter Email / Phone No"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    />
                             </div>
                             <div className="col-md-11 mb-1">
                                 <input 
                                     type="password" 
                                     className="form-control border-none border-bottom rounded-sm" 
                                     id="password" 
-                                    placeholder="Password" />
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    />
                             </div>
                             <div className="col-md-11 d-flex justify-content-center">
                                 <a href="/login" className="text-secondary text-decoration-none">
@@ -88,13 +99,13 @@ const LoginModal = (props) => {
                                 </a>
                             </div>
                             <div className="col-md-11">
-                                <button className={props.darkMode ? "btn btn-light w-100" : "btn btn-dark w-100"}>Login</button>
+                                <button className={props.darkMode ? "btn btn-light w-100" : "btn btn-dark w-100"} onClick={handleUsernamePasswordLogin}>Login</button>
                             </div>
                             <div className="col-md-11 d-flex justify-content-center">
                                 <small className="text-secondary">--- or ---</small>
                             </div>
                             <div className="col-md-11 mb-2">
-                                <button className="btn btn-outline-primary w-100" onClick={login}>
+                                <button className="btn btn-outline-primary w-100" >
                                     <img src={googleIcon} alt="googleIcon" width={25} height={25} className="mx-2" style={{marginTop: "-3px"}}></img>
                                     <span>Login with Google</span>
                                 </button>

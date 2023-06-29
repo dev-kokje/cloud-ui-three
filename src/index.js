@@ -8,8 +8,8 @@ import ThemeProvider from './context/ThemeContext';
 import "@fontsource/roboto";
 import { Provider } from 'react-redux';
 import store from './store/store';
-import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './helpers/auth/keycloak';
+import { ReactKeycloakProvider } from '@react-keycloak/web';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(

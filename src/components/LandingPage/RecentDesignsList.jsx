@@ -1,28 +1,31 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import RecentDesignsTable from "./RecentDesignsTable/RecentDesignsTable"
-import { deleteDesign, getAllDesignsForUser } from "../../api/design-api"
+import { deleteDesign } from "../../api/design-api"
+import { useKeycloak } from "@react-keycloak/web"
+import useDesignService from "../../hooks/useDesignService"
 
 const RecentDesignsList = (props) => {
 
+    const { designs, loading, error, fetchAllDesignsForUser } = useDesignService()
     const [designsData, setDesignsData] = useState([])
-    const [error, setError] = useState(null)
+    const { keycloak } = useKeycloak()
 
     useEffect(() => {
-        getAllDesignsForUser("123")
-        .then(response => setDesignsData(response.data))
-        .catch(err => setError(err))
-    }, [])
+        if(keycloak.authenticated) {
+            fetchAllDesignsForUser('123')
+        }
+    }, [keycloak.authenticated])
 
     const deleteItemHandler = (itemId) => {
-        deleteDesign(itemId, "123")
+        deleteDesign(itemId, "123", keycloak.token)
         .then(__ => setDesignsData(designsData.filter(design => design.id !== itemId)))
-        .catch(err => setError(err))
+        .catch(err => console.log(err))
     }
 
     return <div className="row d-flex justify-content-center mt-4 body-container">
         <div className="col-md-11 fw-bold fs-5">Recent Designs</div>
         {
-            !error && designsData.length === 0 && <div className="col-md-11 fw-bold mt-4">
+            !error && designs.length === 0 && <div className="col-md-11 fw-bold mt-4">
                 <div className="alert alert-primary" role="alert">
                     <small>You don't have any designs in your list. Create one now by clicking button on the top bar.</small>
                 </div>   
@@ -39,8 +42,8 @@ const RecentDesignsList = (props) => {
             </div>
         }
         {
-            designsData.length > 0 && <div className="col-md-11 fw-bold mt-4">
-                <RecentDesignsTable recentDesigns={designsData} deleteItem={deleteItemHandler} />
+            designs.length > 0 && <div className="col-md-11 fw-bold mt-4">
+                <RecentDesignsTable recentDesigns={designs} deleteItem={deleteItemHandler} />
             </div>
         }
     </div>

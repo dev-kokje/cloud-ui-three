@@ -1,28 +1,28 @@
 import avatar from "../../../assets/img/avatar.png"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ThemeContext } from "../../../context/ThemeContext"
 import NewDesignModal from "../../LandingPage/NewDesignModal/NewDesignModal"
 import LoginModal from "../../Auth/LoginModal"
 import { useKeycloak } from "@react-keycloak/web"
-import { useDispatch } from "react-redux"
-import { loginUser } from "../../../store/authSlice"
 
 const TopBar = (props) => {
 
-    const { keycloak, } = useKeycloak()
-    const dispatch = useDispatch()
-
     const { darkMode, toggleColorMode } = useContext(ThemeContext)
+    
+    const { keycloak } = useKeycloak()
+    const handleUsernamePasswordLogin = async (event) => {
+        event.preventDefault()
+
+        try {
+            await keycloak.login()
+        } catch(error) {
+            console.log("Login Failed")
+        }
+    }
 
     useEffect(() => {
-        var payload = {
-            idToken: keycloak.idToken,
-            accessToken: keycloak.token,
-            refreshToken: keycloak.refreshToken
-        }
-        dispatch(loginUser(payload))
-    }, [keycloak, dispatch])
-    
+        console.log("Keycloak - ", keycloak)
+    }, [keycloak])
 
     return <nav className="navbar navbar-expand-lg bg-body-tertiary p-3">
         <div className="container-fluid">
@@ -61,7 +61,7 @@ const TopBar = (props) => {
                             <li><a className="dropdown-item" href="/">App Demo</a></li>
                             <li><a className="dropdown-item" href="/">App Settings</a></li>
                             <li><hr className="dropdown-divider" /></li>
-                            <li><button className="dropdown-item" onClick={keycloak.logout}>Signout</button></li>
+                            <li><button className="dropdown-item" onClick={() => keycloak.logout()}>Signout</button></li>
                         </ul>
                     </li>
                 }
@@ -69,9 +69,9 @@ const TopBar = (props) => {
                     !keycloak.authenticated && <li className="nav-item d-flex align-items-center me-3">
                         <button 
                             className={darkMode ? "btn btn-outline-light" : "btn btn-outline-dark"} 
-                            //data-bs-toggle="modal"  
-                            //data-bs-target="#loginModal"
-                            onClick={keycloak.login}
+                            data-bs-toggle="modal"  
+                            data-bs-target="#loginModal"
+                            onClick={handleUsernamePasswordLogin}
                             >
                             Login
                         </button>

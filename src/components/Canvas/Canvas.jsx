@@ -9,17 +9,16 @@ const Canvas = ({ canvas2D }) => {
 
     const handleElementSelection = (element) => {
         setSelectedElement(element)
-        console.log("Element - ", selectedElement)
     }
 
     return <>
         {
             canvas2D ? <Canvas2D 
                     selectedElement={selectedElement} 
-                    handleElementSelection={handleElementSelection} 
+                    handleElementSelection={(element) => handleElementSelection(element)} 
                 /> : <MainCanvas 
                     selectedElement={selectedElement}
-                    handleElementSelection={handleElementSelection}    
+                    handleElementSelection={(element) => handleElementSelection(element)}    
                 />
         }
         <ResourceDetails selectedElement={selectedElement} />

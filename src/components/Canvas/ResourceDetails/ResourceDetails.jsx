@@ -6,6 +6,8 @@ import ResourceDetailsWindow from "./ResourceDetailsWindow"
 
 const ResourceDetails = ({ selectedElement }) => {
 
+    console.log("Resource tab - ", selectedElement)
+
     const { darkMode } = useContext(ThemeContext)
     const [show, setShow] = useState(true)
     const [activeWindow, setActiveWindow] = useState('1')
@@ -56,7 +58,7 @@ const ResourceDetails = ({ selectedElement }) => {
                 </div>
             </div>
             { activeWindow === '1' && <ProjectDetailsWindow /> }
-            { activeWindow === '2' && <ResourceDetailsWindow /> }
+            { activeWindow === '2' && <ResourceDetailsWindow selectedElement={selectedElement} /> }
         </div>
     </div>
 }
