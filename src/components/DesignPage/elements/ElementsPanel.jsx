@@ -27,6 +27,7 @@ const ElementsPanel = ({ elements }) => {
                                             {
                                                 category.elements.map((element) => <div className="col-md-12" key={element.id} >
                                                         <ElementCard
+                                                            code={element.code}
                                                             icon={element.icon}
                                                             shortName={element.shortName}
                                                             fullName={element.fullName}

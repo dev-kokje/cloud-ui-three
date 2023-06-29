@@ -14,8 +14,8 @@ const ElementCard = (props) => {
             type: ItemTypes.ELEMENT_CARD,
             data: {
                 resource: {
-                    name: 'ec2',
-                    type: 'Ec2C4Instance',
+                    name: props.code,
+                    type: 'default',
                     shortName: props.shortName,
                     fullName: props.fullName,
                 },
