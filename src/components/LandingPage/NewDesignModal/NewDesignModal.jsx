@@ -5,8 +5,7 @@ import google from "../../../assets/icons/google-cloud.png"
 import { useDispatch } from "react-redux"
 import { setDesign } from "../../../store/designSlice"
 import { useNavigate } from "react-router-dom"
-import { saveNewDesign } from "../../../api/design-api"
-import { useKeycloak } from "@react-keycloak/web"
+import useDesignService from "../../../hooks/useDesignService"
 
 const NewDesignModal = (props) => {
 
@@ -17,7 +16,7 @@ const NewDesignModal = (props) => {
     const [showSpinner, setShowSpinner] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { keycloak } = useKeycloak()
+    const { addNewDesign } = useDesignService()
 
     const titleChangeHandler = (e) => {
         setTitle(e.target.value)
@@ -47,7 +46,7 @@ const NewDesignModal = (props) => {
         backdrop.parentNode.removeChild(backdrop);
     }
 
-    const createNewDesignHandler = () => {
+    const createNewDesignHandler = async () => {
 
         showSpinnerChangeHandler()
 
@@ -61,24 +60,22 @@ const NewDesignModal = (props) => {
         if(azsChecked) providers.push("Azure")
         if(gcsChecked) providers.push("GCS")
 
-        saveNewDesign({
+        const response = await addNewDesign({
             userId: "123",
             name: designTitle,
             providers: providers
-        }, keycloak.token)
-        .then(response => {
-                dispatch(
-                    setDesign({
-                        name: response.data.name,
-                        providers: response.data.providers
-                    })
-                )
-                showSpinnerChangeHandler()
-                hideModal()
-                navigate("/canvas-edit")
-            }
+        })
+
+        console.log(response)
+        dispatch(
+            setDesign({
+                name: response.data.name,
+                providers: response.data.providers
+            })
         )
-        .catch(err => console.log(err))
+        showSpinnerChangeHandler()
+        hideModal()
+        navigate("/canvas-edit")
     }
 
     return <div className="modal fade" id="newDesignModal" tabIndex="-1" aria-labelledby="newDesignModal" aria-hidden="true">

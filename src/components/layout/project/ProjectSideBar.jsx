@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import ElementsPanel from "../../DesignPage/elements/ElementsPanel"
-import { getAllElements } from "../../../api/elements-api"
+import useElementsProvider from "../../../hooks/useElementsProviderService"
 
 const ProjectSideBar = () => {
 
-    const[elements, setElements] = useState([])
+    const { elements, loading, error, loadElements } = useElementsProvider()
 
-    useEffect(() => {
-        console.log("Loading elements")
-        setElements(getAllElements())
+    useEffect(() => {
+        loadElements()
+        console.log(elements)
     }, [])
 
     return <div className="row border-end h-100 d-flex justify-content-center">
@@ -25,9 +25,21 @@ const ProjectSideBar = () => {
             </div>
             <div className="row d-flex justify-content-center">
                 <div className="col-md-11">
-                    {/* <ElementsPanel elements={elements} /> */}
+                    { elements !== undefined && <ElementsPanel elements={elements} /> }
+                    { 
+                        loading &&  <div className="spinner-border text-primary text-center" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                    }
                 </div>
                 <hr/>
+                    <div className="col-md-11">
+                        { 
+                            error &&  <div className="alert alert-danger" role="alert">
+                                    Problem loading elements. Please try again later...
+                                </div>
+                        }
+                    </div>
                     {/* {
                         elements.map((element) => 
                             <div className="col-md-6" key={element.id} >

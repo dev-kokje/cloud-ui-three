@@ -1,13 +1,11 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect } from "react"
 import RecentDesignsTable from "./RecentDesignsTable/RecentDesignsTable"
-import { deleteDesign } from "../../api/design-api"
 import { useKeycloak } from "@react-keycloak/web"
 import useDesignService from "../../hooks/useDesignService"
 
 const RecentDesignsList = (props) => {
 
-    const { designs, loading, error, fetchAllDesignsForUser } = useDesignService()
-    const [designsData, setDesignsData] = useState([])
+    const { designs, loading, error, fetchAllDesignsForUser, removeDesign } = useDesignService()
     const { keycloak } = useKeycloak()
 
     useEffect(() => {
@@ -17,12 +15,15 @@ const RecentDesignsList = (props) => {
     }, [keycloak.authenticated])
 
     const deleteItemHandler = (itemId) => {
-        deleteDesign(itemId, "123", keycloak.token)
-        .then(__ => setDesignsData(designsData.filter(design => design.id !== itemId)))
-        .catch(err => console.log(err))
+        removeDesign(itemId, "123")
     }
 
     return <div className="row d-flex justify-content-center mt-4 body-container">
+        {
+            loading && <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        }
         <div className="col-md-11 fw-bold fs-5">Recent Designs</div>
         {
             !error && designs.length === 0 && <div className="col-md-11 fw-bold mt-4">
