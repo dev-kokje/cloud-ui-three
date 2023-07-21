@@ -2,6 +2,7 @@ import { useState } from "react"
 import Canvas2D from "./Canvas2D/Canvas2D"
 import MainCanvas from "./MainCanvas"
 import ResourceDetails from "./ResourceDetails/ResourceDetails"
+import Canvas3D from "./Canvas3D/Canvas3D"
 
 const Canvas = ({ canvas2D }) => {
 
@@ -16,7 +17,7 @@ const Canvas = ({ canvas2D }) => {
             canvas2D ? <Canvas2D 
                     selectedElement={selectedElement} 
                     handleElementSelection={(element) => handleElementSelection(element)} 
-                /> : <MainCanvas 
+                /> : <Canvas3D 
                     selectedElement={selectedElement}
                     handleElementSelection={(element) => handleElementSelection(element)}    
                 />
