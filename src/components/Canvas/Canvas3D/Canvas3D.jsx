@@ -1,4 +1,4 @@
-import { Canvas, useFrame } from "@react-three/fiber"
+import { Canvas } from "@react-three/fiber"
 import BottomPlane from "./BottomPlane"
 import { ThemeContext } from "../../../context/ThemeContext"
 import { OrbitControls } from "@react-three/drei"
@@ -9,12 +9,11 @@ import { useDrop } from "react-dnd"
 import { ItemTypes } from "../../../helpers/ItemTypes"
 import { addDesignElement } from "../../../store/designSlice"
 import update from "immutability-helper"
-import { MathUtils } from "three"
 
 const Canvas3D = ({selectedElement, handleElementSelection}) => {
 
     const camera = {
-        position: [5, 6, 5]
+        position: [2.5, 7, 2.5]
     }
     const { darkMode } = useContext(ThemeContext)
     const [isDragging, setIsDragging] = useState(true)
@@ -64,10 +63,10 @@ const Canvas3D = ({selectedElement, handleElementSelection}) => {
     return <>
         <Canvas
             name="canvas3D"
-            frameloop="demand"
             camera={camera}
             data-testid="Canvas3D"
             ref={drop}
+            frameloop="demand"
         >
             <OrbitControls
                 minPolarAngle={0}
@@ -103,9 +102,7 @@ const Canvas3D = ({selectedElement, handleElementSelection}) => {
                     />
                 })
             }
-            <Element3D 
-                position={[0, 0.25, 0]} 
-            />
+            <ambientLight />
         </Canvas>
     </>
 }

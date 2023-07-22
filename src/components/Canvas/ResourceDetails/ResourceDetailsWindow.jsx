@@ -1,4 +1,5 @@
 import { elements } from "../../icons/aws/elements"
+import ResourceDetailsForm from "./ResourceDetailsForm"
 
 const ResourceDetailsWindow = ({ selectedElement }) => {
 
@@ -26,6 +27,9 @@ const ResourceDetailsWindow = ({ selectedElement }) => {
                     </div>
                 </div>
                 <hr />
+                <div className='col-md-11'>
+                    <ResourceDetailsForm />
+                </div>
             </div>
         }
     </>
