@@ -30,6 +30,9 @@ const ResourceDetailsWindow = ({ selectedElement }) => {
                 <div className='col-md-11'>
                     <ResourceDetailsForm />
                 </div>
+                <div className='col-md-11 position-absolute bottom-0 mb-4 justify-content-center'>
+                    <button type="submit" className="btn btn-danger w-100">Remove Resource</button>
+                </div>
             </div>
         }
     </>
