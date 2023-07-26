@@ -1,0 +1,80 @@
+openapi: 3.0.0
+
+info:
+  title: Vivy Console Service
+  version: 0.1.0
+
+paths:
+  /feedback/csat:
+    post:
+      summary: Post csat feedback to CS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CsatFeebackRequest'
+      responses:
+        '201':
+          description: Success
+        '500':
+          description: Internal server errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /feedback/telehealth:
+    post:
+      summary: Post telehealth feedback to CS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/THCallFeebackRequest'
+      responses:
+        '201':
+          description: Success
+        '500':
+          description: Internal server errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    
+
+components:
+  schemas:
+    CsatFeebackRequest:
+      type: object
+      properties:
+        message:
+          type: string
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+
+    THCallFeebackRequest:
+      type: object
+      properties:
+        message:
+          type: string
+    
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth:
+    - basic
