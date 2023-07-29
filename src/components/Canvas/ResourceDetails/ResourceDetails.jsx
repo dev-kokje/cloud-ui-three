@@ -2,15 +2,15 @@ import { useContext, useState } from "react"
 import { ThemeContext } from "../../../context/ThemeContext"
 import ProjectDetailsWindow from "./ProjectDetailsWindow"
 import ResourceDetailsWindow from "./ResourceDetailsWindow"
+import { useSelector } from "react-redux"
 
 
-const ResourceDetails = ({ selectedElement }) => {
-
-    console.log("Resource tab - ", selectedElement)
+const ResourceDetails = () => {
 
     const { darkMode } = useContext(ThemeContext)
     const [show, setShow] = useState(true)
     const [activeWindow, setActiveWindow] = useState('1')
+    const selectedElement = useSelector((state) => state.activeElementSlice.element)
     
     const visibleStyle = {
         position: 'absolute',

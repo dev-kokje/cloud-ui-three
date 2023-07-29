@@ -10,32 +10,6 @@ const LoginModal = (props) => {
     const [password, setPassword] = useState("")
     const user = useSelector((state) => state.authSlice)
 
-    // const usernamePasswordLogin = (event) => {
-
-    //     event.preventDefault()
-
-    //     console.log("Logging in USER")
-    //     const API_BASE_URL = "http://localhost:8080"
-
-    //     const url = API_BASE_URL + "/realms/cloud-ui-three/protocol/openid-connect/token"
-    //     const headers = {
-    //         'Content-Type': 'application/x-www-form-urlencoded'
-    //     }
-    //     const data = new URLSearchParams()
-    //     data.append('client_id', 'frontend')
-    //     data.append('grant_type', 'password')
-    //     data.append('username', email)
-    //     data.append('password', password)
-
-    //     axios.post(url, data, { headers })
-    //     .then(response => {
-    //         console.log('Response:', response.data);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error:', error);
-    //     })
-    // }
-
     const { keycloak } = useKeycloak()
     const handleUsernamePasswordLogin = async (event) => {
         event.preventDefault()

@@ -8,7 +8,6 @@ const ProjectSideBar = () => {
 
     useEffect(() => {
         loadElements()
-        console.log(elements)
     }, [])
 
     return <div className="row border-end h-100 d-flex justify-content-center">

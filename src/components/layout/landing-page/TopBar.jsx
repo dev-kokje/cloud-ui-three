@@ -20,10 +20,6 @@ const TopBar = (props) => {
         }
     }
 
-    useEffect(() => {
-        console.log("Keycloak - ", keycloak)
-    }, [keycloak])
-
     return <nav className="navbar navbar-expand-lg bg-body-tertiary p-3">
         <div className="container-fluid">
             <a className="navbar-brand ms-3" href="/home">Cloud UI Three</a>

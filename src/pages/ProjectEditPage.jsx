@@ -8,6 +8,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import DesignToolbar from '../components/DesignPage/DesignToolbar';
 import Canvas from '../components/Canvas/Canvas';
+import DeployWindow from '../components/Deploy/DeployWindow';
 
 const ProjectEditPage = (props) => {
 
@@ -15,6 +16,7 @@ const ProjectEditPage = (props) => {
         ['82%', '18%'] 
     )
     const [canvas2D, setCanvas2D] =  useState(false)
+    const [currentWindow, setCurrentWindow] = useState("design")
     
     return <div>
         <ProjectTopBar />
@@ -25,7 +27,12 @@ const ProjectEditPage = (props) => {
                         <ProjectSideBar />
                     </div>
                     <div className='col-md-10 px-3'>
-                        <DesignToolbar canvas2D={canvas2D} setCanvas2D={() => setCanvas2D(!canvas2D)} />
+                        <DesignToolbar 
+                            canvas2D={canvas2D} 
+                            setCanvas2D={() => setCanvas2D(!canvas2D)}
+                            currentWindow={currentWindow}
+                            setCurrentWindow={setCurrentWindow}
+                        />
                         <SplitPane
                             split='horizontal'
                             sizes={sizes}
@@ -34,7 +41,12 @@ const ProjectEditPage = (props) => {
                         >
                             <Pane className='d-flex' minSize={50} maxSize='90%'>
                                 <div className='container-fluid d-flex'>
-                                    <Canvas canvas2D={canvas2D} />
+                                    {
+                                        currentWindow === "design" && <Canvas canvas2D={canvas2D} />
+                                    }
+                                    {
+                                        currentWindow === "deploy" && <DeployWindow />
+                                    }
                                 </div>
                             </Pane>
                             <Pane>

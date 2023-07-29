@@ -46,7 +46,6 @@ const ElementCard = (props) => {
         ref={drag} 
         className="card w-100 mb-2 stretched-link" 
         style={{ opacity: isDragging ? 0.4 : 1 }} 
-        onClick={() => console.log("Click")}
         data-testid={`element-card`}
         >
         <div className="card-body p-0">

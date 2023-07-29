@@ -66,7 +66,6 @@ const NewDesignModal = (props) => {
             providers: providers
         })
 
-        console.log(response)
         dispatch(
             setDesign({
                 name: response.data.name,

@@ -1,30 +1,40 @@
 import { useRef, useState } from "react"
-import { Edges } from "@react-three/drei"
-import { useFrame, useLoader } from "@react-three/fiber"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { Edges, useBounds } from "@react-three/drei"
+import { useFrame } from "@react-three/fiber"
 import EC2InstanceModel from "../../../models/EC2InstanceModel"
+import { useDispatch } from "react-redux"
+import { changeActiveElement } from "../../../store/activeElementSlice"
 
-const Element3D = ({ id, left, top, resource, hideSourceOnDrag, selectedElement, handleElementSelection, handleDraggingChange }) => {
+const Element3D = ({ id, left, top, resource, handleElementSelection }) => {
 
-    const displayEdge = (selectedElement !== undefined && selectedElement !== null && selectedElement.id === id)
-    
-    const [position, setPosition] = useState([(left/100) - 5, 0.130, (top/100) - 5])
+    const [displayEdge, setDisplayEdge] = useState(false)
+    const ref = useRef()
+    const [position, ] = useState([(left/100) - 5, 0.130, (top/100) - 5])
+    const api = useBounds()
+    const dispatch = useDispatch()
 
     const selectThisElement = () => {
         const element = {
             id: id,
             resource: resource
         }
-        handleElementSelection(element)
+        dispatch(changeActiveElement(element))
     }
 
     useFrame(() => {
         console.log("Hey, I am executing every frame")
     })
 
+    const handleObjectClicked = (e) => {
+        e.stopPropagation()
+        e.delta <= 20 && api.refresh(e.object).fit()
+        setDisplayEdge(true)
+        selectThisElement()
+    }
+
     return <>
-        <group onClick={selectThisElement}>
-            <mesh position={position}>
+        <group onClick={handleObjectClicked} ref={ref}>
+            <mesh position={position} dispose={null}>
             <boxGeometry args={[1.05, 0.25, 1.05]}/>
             <meshPhongMaterial 
                 opacity={displayEdge ? 0.2 : 0} 

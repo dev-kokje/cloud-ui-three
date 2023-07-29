@@ -84,7 +84,7 @@ const INSTANCE_TYPES = [
 const InstanceInfoCard = ({name, family, vCPU, memory, freeTier}) => {
     return <div className="card">
         <div className="card-body">
-            <h5 class="card-subtitle mb-2"> { name } </h5>
+            <h5 className="card-subtitle mb-2"> { name } </h5>
             <div className="row d-flex justify-content-between">
                 <div className="col-md-4 text-muted">
                     Family: {family}
@@ -237,7 +237,7 @@ const EC2ResourceDetails = (props) => {
                         <div className="row d-flex justify-content-between">
                             <div className="col-md-4">
                                 <div className="mb-3">
-                                    <label for="instanceFamily" className="form-label">Family</label>
+                                    <label htmlFor="instanceFamily" className="form-label">Family</label>
                                     <select 
                                         type="email" 
                                         className="form-select" 
@@ -245,7 +245,7 @@ const EC2ResourceDetails = (props) => {
                                         value={filterFamily}
                                         onChange={handleInstanceFilterChange}
                                     >
-                                        <option value="" selected></option>
+                                        <option value=""></option>
                                         {
                                             getUniqueInstanceFamilies().map((family, index) => <option key={index} value={family}> { family } </option>)
                                         }
@@ -254,7 +254,7 @@ const EC2ResourceDetails = (props) => {
                             </div>
                             <div className="col-md-4">
                                 <div className="mb-3">
-                                    <label for="instanceFamily" className="form-label">vCPU</label>
+                                    <label htmlFor="instanceFamily" className="form-label">vCPU</label>
                                     <select 
                                         type="email" 
                                         className="form-select" 
@@ -262,7 +262,7 @@ const EC2ResourceDetails = (props) => {
                                         value={filterVCpu}
                                         onChange={handleInstanceFilterChange}
                                     >
-                                        <option value="" selected></option>
+                                        <option value=""></option>
                                         {
                                             getUniqueInstanceVCPU().map((vCPU, index) => <option key={index} value={vCPU}> { vCPU } </option>)
                                         }
@@ -271,7 +271,7 @@ const EC2ResourceDetails = (props) => {
                             </div>
                             <div className="col-md-4">
                                 <div className="mb-3">
-                                    <label for="instanceFamily" className="form-label">Memory (GiB)</label>
+                                    <label htmlFor="instanceFamily" className="form-label">Memory (GiB)</label>
                                     <select 
                                         type="email" 
                                         className="form-select" 
@@ -279,7 +279,7 @@ const EC2ResourceDetails = (props) => {
                                         value={filterMemory}
                                         onChange={handleInstanceFilterChange}
                                     >
-                                        <option value="" selected></option>
+                                        <option value=""></option>
                                         {
                                             getUniqueInstanceMemory().map((memory, index) => <option key={index} value={memory}> { memory } </option>)
                                         }
@@ -290,7 +290,7 @@ const EC2ResourceDetails = (props) => {
                         <hr />
                         <div className="row">
                             {
-                                filteredInstanceTypes.map((element, index) => <div className="col-md-12 my-1">
+                                filteredInstanceTypes.map((element, index) => <div key={index} className="col-md-12 my-1">
                                     <InstanceInfoCard
                                         key={index}
                                         name={element.key}

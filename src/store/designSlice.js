@@ -13,7 +13,6 @@ export const designSlice = createSlice({
             state.providers = [...data.payload.providers]
         },
         addDesignElement: (state, data) => {
-            console.log(data.payload)
             Object.keys(data.payload).map((key) => {
                 state.elements[key] = data.payload[key]
                 return ''

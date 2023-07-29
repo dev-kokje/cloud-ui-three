@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const activeElementSlice = createSlice({
     name: "activeElementSlice",
     initialState: {
-        elementId: 1
+        element: null
     },
     reducers: {
         changeActiveElement: (state, data) => {
-            state.elementId = data.payload.uuid
+            state.element = data.payload
         }
     }
 })

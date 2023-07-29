@@ -7,8 +7,6 @@ const ElementsPanel = ({ elements }) => {
     return <>
         <div className="accordion mb-4" id="elementsAccordion">
             {
-                //console.log(Object.keys(elements))
-                
                 elements.map((elementGroup, index) => <div className="accordion-item" key={index}>
                         <h2 className="accordion-header" id="headingOne">
                             <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">

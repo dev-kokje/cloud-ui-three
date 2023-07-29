@@ -3,8 +3,6 @@ import ResourceDetailsForm from "./ResourceDetailsForm"
 
 const ResourceDetailsWindow = ({ selectedElement }) => {
 
-    console.log("Selected Element - ", selectedElement)
-
     return <>
         {
             selectedElement === null && <div className="text-center alert alert-danger m-4">

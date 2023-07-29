@@ -2,7 +2,6 @@ import { useGLTF } from "@react-three/drei"
 
 const EC2InstanceModel = ({position}) => {
     const { nodes, materials } = useGLTF('/models/ec2.gltf')
-    console.log("Position - ", position)
     return (
         <group dispose={null}>
             <group position={position} scale={[0.5, 0.123, 0.5]}>
